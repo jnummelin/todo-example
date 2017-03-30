@@ -5,12 +5,22 @@ pipeline:
       - bundle install --path=bundler
       - rspec spec/
 
+  integration-test:
+    image: jnummelin/build-tools
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker-compose up -d --build
+      - bats tests/
+      - docker-compose stop
+      - docker-compose rm -f -v
+
   docker:
     image: plugins/docker:latest
     environment:
       - DOCKER_LAUNCH_DEBUG=true
     repo: jnummelin/todo-example
-    tag: latest
+    tag: ${DRONE_COMMIT}
     file: Dockerfile
     when:
       branch: master

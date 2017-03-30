@@ -31,8 +31,8 @@ services:
           oneshot: true
 
   web:
-    image: jnummelin/todo-example:latest
-    instances: 15
+    image: jnummelin/todo-example:${DRONE_COMMIT}
+    instances: 3
     deploy:
       wait_for_port: 9292
       min_health: 0.8
