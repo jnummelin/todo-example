@@ -31,7 +31,7 @@ services:
           oneshot: true
 
   web:
-    image: jnummelin/todo-example:${DRONE_COMMIT}
+    image: jnummelin/todo-example:${DRONE_TAG}
     instances: 3
     deploy:
       wait_for_port: 9292

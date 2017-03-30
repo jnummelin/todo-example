@@ -20,17 +20,17 @@ pipeline:
     environment:
       - DOCKER_LAUNCH_DEBUG=true
     repo: jnummelin/todo-example
-    tag: ${DRONE_COMMIT}
+    tag: ${DRONE_TAG}
     file: Dockerfile
     when:
-      branch: master
+      event: tag
 
   kontena:
     image: kontena/cli
     commands:
       - SSL_IGNORE_ERRORS=true kontena stack upgrade todo
     when:
-      branch: master
+      event: tag
 
 services:
   database:
