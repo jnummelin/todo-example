@@ -11,6 +11,13 @@ variables:
     type: string
     from:
       env: VHOST
+  lb:
+    type: string
+    from:
+      env: LOADBALANCER
+      service_link:
+        prompt: Choose a loadbalancer
+        image: kontena/lb
 
 services:
   mongo:
@@ -47,7 +54,7 @@ services:
       wait_for_port: 9292
       min_health: 0.8
     links:
-      - infra/lb-external
+      - ${lb}
     depends_on:
       - mongo
     environment:

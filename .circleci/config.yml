@@ -83,6 +83,7 @@ jobs:
             # Variables for the stack
             VHOST: todo-app.kontena.works
             TAG: ${CIRCLE_BUILD_NUM}
+            LOADBALANCER: ingress-lb/lb
           command: |
             kontena stack install || kontena stack upgrade todo
 
