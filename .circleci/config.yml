@@ -78,14 +78,13 @@ jobs:
 
     steps:
       - checkout
-      - run: echo 'export TAG=$CIRCLE_BUILD_NUM' >> $BASH_ENV
       - run:
           environment:
             # Variables for the stack
             VHOST: todo-app.kontena.works
             LOADBALANCER: ingress-lb/lb
           command: |
-            kontena stack install || kontena stack upgrade todo
+            kontena stack install -v release=${CIRCLE_BUILD_NUM} || kontena stack upgrade -v release=${CIRCLE_BUILD_NUM} todo
 
 workflows:
   version: 2
