@@ -78,6 +78,7 @@ jobs:
 
     steps:
       - checkout
+      - run: echo 'export TAG=$CIRCLE_BUILD_NUM' >> $BASH_ENV
       - run:
           environment:
             # Variables for the stack
